@@ -1,4 +1,4 @@
-const Post = require("../models/post");
+const Post = require("../models/postModel");
 const db = require("../database/db");
 const postModel = new Post(db);
 

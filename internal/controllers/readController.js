@@ -1,4 +1,4 @@
-const Read = require("../models/read");
+const Read = require("../models/readModel.js");
 const db = require("../database/db");
 const readModel = new Read(db);
 

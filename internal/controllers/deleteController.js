@@ -1,4 +1,4 @@
-const Delete = require("../models/delete");
+const Delete = require("../models/deleteModel");
 const db = require("../database/db");
 
 const deleteModel = new Delete(db);

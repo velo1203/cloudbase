@@ -1,5 +1,5 @@
 const db = require("../database/db");
-const Patch = require("../models/patch");
+const Patch = require("../models/patchModel");
 const patchModel = new Patch(db);
 
 exports.patch = (req, res) => {
