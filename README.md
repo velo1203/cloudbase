@@ -5,6 +5,8 @@
 Previously, users had to install many programs to use the database, and many preliminary operations such as login and registration were required. Therefore, we pursued a simple database.
 We chose to use a `REST API` communication system that can be used in any language, and we developed it to be easily deployed as an `.exe` file.
 
+### [download](https://velo1203.github.io/cloudbase/webDownload/) page (lastest version)
+
 # Language
 
 [한국어](KOREAN.md)
