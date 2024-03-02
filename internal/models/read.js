@@ -8,7 +8,7 @@ class Read {
 
     read(path, res) {
         try {
-            const query = `SELECT data FROM entities WHERE path = ?;`;
+            const query = `SELECT data,id FROM entities WHERE path = ?;`;
 
             this.db.get(query, [path], (err, row) => {
                 if (err) {
@@ -16,7 +16,9 @@ class Read {
                 }
                 if (row) {
                     log.success("Data found", { path: path });
-                    res.json(JSON.parse(row.data));
+                    row.data = JSON.parse(row.data);
+                    row.data.id = row.id;
+                    res.json(row.data);
                 } else {
                     log.fail("Data not found", { path: path });
                     res.status(404).json({ message: "Data not found" });
@@ -31,7 +33,7 @@ class Read {
     // search 메서드 수정
     search(queryParams, path, res) {
         try {
-            let sqlQuery = `SELECT data FROM entities`; // 변수명을 sqlQuery로 변경하여 중복을 피함
+            let sqlQuery = `SELECT data,id FROM entities`; // 변수명을 sqlQuery로 변경하여 중복을 피함
             const conditions = [];
             const params = [];
 
@@ -40,8 +42,14 @@ class Read {
             params.push(`${path}%`); // path 파라미터를 사용하여 LIKE 조건 설정
             // queryParams 객체를 순회하며, 조건과 파라미터를 추가
             Object.keys(queryParams).forEach((key) => {
-                conditions.push(`json_extract(data, '$.${key}') = ?`);
-                params.push(JSON.parse(queryParams[key]));
+                if (key === "id") {
+                    // id는 별도로 처리
+                    conditions.push(`id = ?`);
+                    params.push(queryParams[key]); // JSON.parse를 사용하지 않고 직접 값을 추가합니다.
+                } else {
+                    conditions.push(`json_extract(data, '$.${key}') = ?`);
+                    params.push(queryParams[key]);
+                }
             });
 
             // 조건이 하나 이상 있는 경우, WHERE 절 추가
@@ -56,7 +64,11 @@ class Read {
                 }
                 if (rows.length > 0) {
                     // 모든 결과의 data 필드를 JSON으로 파싱하여 응답
-                    const results = rows.map((row) => JSON.parse(row.data));
+                    const results = rows.map((row) => {
+                        row.data = JSON.parse(row.data);
+                        row.data.id = row.id;
+                        return row.data;
+                    });
                     log.success("Data found", { path: path });
                     res.json(results);
                 } else {

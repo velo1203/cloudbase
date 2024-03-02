@@ -23,7 +23,7 @@ class Patch {
 
                 // 기존 데이터를 JSON 객체로 변환
                 let currentData = JSON.parse(row.data);
-                const pastData = JSON.parse(newData);
+                const pastData = JSON.parse(newData); // 새 데이터를 JSON 객체로 변환
                 // 새 데이터로 기존 데이터를 업데이트
                 let updatedData = { ...currentData, ...pastData };
 
