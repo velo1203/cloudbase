@@ -5,7 +5,8 @@ const readRouter = require("../internal/routes/readRouter");
 const deleteRouter = require("../internal/routes/deleteRouter");
 const logger = require("../internal/middleware/log_request");
 
-const config = require("../config.json"); // 설정 파일을 불러옵니다.
+const fs = require("fs");
+const config = JSON.parse(fs.readFileSync("./config.json", "utf8"));
 const app = express();
 const port = config.port || 3000;
 
