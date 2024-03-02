@@ -4,6 +4,8 @@ const postRouter = require("../internal/routes/postRouter");
 const readRouter = require("../internal/routes/readRouter");
 const deleteRouter = require("../internal/routes/deleteRouter");
 const setPort = require("../internal/bootstrap/port");
+const logger = require("../internal/config/Logger");
+const log = new logger();
 
 const app = express();
 const port = setPort();
@@ -15,5 +17,5 @@ app.use(readRouter);
 app.use(deleteRouter);
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    log.info(`Server is running on port ${port}`);
 });
