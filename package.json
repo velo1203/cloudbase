@@ -4,6 +4,8 @@
     "description": "",
     "bin": "cmd/index.js",
     "pkg": {
+        
+"assets": ["internal/database/*.db", "internal/requestmodel/*.js"],
         "scripts": [
             "cmd/**/*.js",
             "internal/**/*.js"
