@@ -16,6 +16,9 @@ app.use(postRouter);
 app.use(readRouter);
 app.use(deleteRouter);
 
+log.success("Server initialized");
+
 app.listen(port, () => {
     log.info(`Server is running on port ${port}`);
+    log.info("Hello User");
 });

@@ -12,6 +12,7 @@ function setPort() {
         return config.port;
     } catch (err) {
         log.error("Error reading config file", { error: err.message });
+        log.info("Using default port 3000");
         return 3000;
     }
 }
