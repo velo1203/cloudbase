@@ -1,3 +1,6 @@
+const logger = require("../config/Logger");
+const log = new logger();
+
 class Read {
     constructor(db) {
         this.db = db;
@@ -12,12 +15,15 @@ class Read {
                     return res.status(500).json({ error: err.message });
                 }
                 if (row) {
+                    log.success("Data found", { path: path });
                     res.json(JSON.parse(row.data));
                 } else {
+                    log.fail("Data not found", { path: path });
                     res.status(404).json({ message: "Data not found" });
                 }
             });
         } catch (err) {
+            log.error("Error reading data", { path: path });
             return res.status(500).json({ error: err.message });
         }
     }
@@ -42,21 +48,24 @@ class Read {
             if (conditions.length > 0) {
                 sqlQuery += ` WHERE ${conditions.join(" AND ")}`;
             }
-            console.log(sqlQuery, params); // 동적으로 생성된 쿼리와 파라미터 출력 (디버깅용
             // 동적으로 생성된 쿼리 실행
             this.db.all(sqlQuery, params, (err, rows) => {
                 if (err) {
+                    log.error("Error searching data", { path: path });
                     return res.status(500).json({ error: err.message });
                 }
                 if (rows.length > 0) {
                     // 모든 결과의 data 필드를 JSON으로 파싱하여 응답
                     const results = rows.map((row) => JSON.parse(row.data));
+                    log.success("Data found", { path: path });
                     res.json(results);
                 } else {
+                    log.fail("No matching data found", { path: path });
                     res.status(404).json({ message: "No matching data found" });
                 }
             });
         } catch (err) {
+            log.error("Error searching data", { path: path });
             return res.status(500).json({ error: err.message });
         }
     }

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const readController = require("../controllers/readController");
-
 router.get("*", (req, res) => {
     readController.read(req, res);
 });

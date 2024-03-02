@@ -15,7 +15,7 @@ You need to run cloudbase.exe.
 
 If you want to change the port, you can do so by changing the value in `config.json.`
 
-# CRUD
+# REST API
 
 ```bash
 GET localhost:[port]/[path]
