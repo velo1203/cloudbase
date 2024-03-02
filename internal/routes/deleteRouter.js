@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const deleteController = require("../controllers/deleteController");
+const RouterVerification = require("../middleware/RouterRequest");
 
-router.delete("*", (req, res) => {
+router.delete("*", RouterVerification, (req, res) => {
     deleteController.delete(req, res);
 });
 

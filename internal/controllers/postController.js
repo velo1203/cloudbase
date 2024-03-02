@@ -9,9 +9,6 @@ exports.post = (req, res) => {
         // ID가 포함되어 있는지 확인
         return res.status(400).json({ error: "ID cannot be posted" });
     }
-    if (req.path[req.path.length - 1] === "/") {
-        return res.status(400).json({ error: "Invalid path" });
-    }
     postModel.post(path, data, res, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });

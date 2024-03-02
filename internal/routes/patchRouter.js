@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const patchController = require("../controllers/patchController");
+const RouterVerification = require("../middleware/RouterRequest");
 
-router.patch("*", (req, res) => {
+router.patch("*", RouterVerification, (req, res) => {
     patchController.patch(req, res);
 });
 

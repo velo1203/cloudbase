@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const postController = require("../controllers/postController");
+const RouterVerification = require("../middleware/RouterRequest");
 
-router.post("*", (req, res) => {
+router.post("*", RouterVerification, (req, res) => {
     postController.post(req, res);
 });
 

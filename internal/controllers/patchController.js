@@ -6,10 +6,6 @@ exports.patch = (req, res) => {
     const path = req.params[0];
     const data = JSON.stringify(req.body);
 
-    if (JSON.parse(data)["id"]) {
-        // ID가 포함되어 있는지 확인
-        return res.status(400).json({ error: "ID cannot be updated" });
-    }
     patchModel.patch(path, data, res, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
