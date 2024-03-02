@@ -3,6 +3,7 @@ const express = require("express");
 const postRouter = require("../internal/routes/postRouter");
 const readRouter = require("../internal/routes/readRouter");
 const deleteRouter = require("../internal/routes/deleteRouter");
+const patchRouter = require("../internal/routes/patchRouter");
 const setPort = require("../internal/bootstrap/port");
 const logger = require("../internal/config/Logger");
 const log = new logger();
@@ -15,10 +16,10 @@ app.use(express.json()); // JSON 요청 본문 파싱을 위한 미들웨어
 app.use(postRouter);
 app.use(readRouter);
 app.use(deleteRouter);
+app.use(patchRouter);
 
 log.success("Server initialized");
 
 app.listen(port, () => {
     log.info(`Server is running on port ${port}`);
-    log.info("Hello User");
 });
