@@ -4,17 +4,10 @@ const postRouter = require("../internal/routes/postRouter");
 const readRouter = require("../internal/routes/readRouter");
 const deleteRouter = require("../internal/routes/deleteRouter");
 const logger = require("../internal/middleware/log_request");
+const setPort = require("../internal/bootstrap/port");
 
-const fs = require("fs");
-let config = null;
-try {
-    const data = fs.readFileSync("./config.json");
-    config = JSON.parse(data);
-} catch (err) {
-    console.log("Undefind reading config file");
-}
 const app = express();
-const port = (config && config.port) || 3000;
+const port = setPort();
 
 app.use(express.json()); // JSON 요청 본문 파싱을 위한 미들웨어
 app.use(logger);
