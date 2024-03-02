@@ -1,4 +1,4 @@
-# Cloudbase
+# Cloudbase ☁️
 
 **CloudBase** is a REST API-based database system. You can easily create and manage databases and get data quickly and easily.
 

@@ -3,6 +3,7 @@ const logger = require("../config/Logger");
 const log = new logger();
 
 function setPort() {
+    // 포트 설정을 위한 함수
     let config = null;
 
     try {
