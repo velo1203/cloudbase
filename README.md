@@ -1,5 +1,7 @@
 # Cloudbase
 
+![CloudBase Logo](https://github.com/velo1203/cloudbase/raw/main/asset/cloudbase.png)
+
 **CloudBase** is a REST API-based database system. You can easily create and manage databases and get data quickly and easily.
 
 Previously, users had to install many programs to use the database, and many preliminary operations such as login and registration were required. Therefore, we pursued a simple database.
