@@ -26,7 +26,7 @@ cloudbase.exe를 실행해야 합니다.
 
 REST API는 HTTP를 사용하여 데이터를 주고받는 방식입니다.
 
-GET`, `POST`, `DELETE`, `PATCH` 메서드가 있습니다.
+`GET`, `POST`, `DELETE`, `PATCH` 메서드가 있습니다.
 
 1. [GET](#GET): 데이터를 가져옵니다.
 2. [POST](#POST): 데이터를 추가합니다.
