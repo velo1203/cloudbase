@@ -30,6 +30,33 @@ class Read {
         }
     }
 
+    getAll(path, res) {
+        try {
+            let sqlQuery = `SELECT data,id FROM entities WHERE path LIKE ?`;
+            this.db.all(sqlQuery, [`${path}%`], (err, rows) => {
+                if (err) {
+                    log.error("Error reading data", { path: path });
+                    return res.status(500).json({ error: err.message });
+                }
+                if (rows.length > 0) {
+                    const results = rows.map((row) => {
+                        row.data = JSON.parse(row.data);
+                        row.data.id = row.id;
+                        return row.data;
+                    });
+                    log.success("Data found", { path: path });
+                    res.json(results);
+                } else {
+                    log.fail("No matching data found", { path: path });
+                    res.status(404).json({ message: "No matching data found" });
+                }
+            });
+        } catch (err) {
+            log.error("Error reading data", { path: path });
+            return res.status(500).json({ error: err.message });
+        }
+    }
+
     // search 메서드 수정
     search(queryParams, path, res) {
         try {
@@ -48,7 +75,7 @@ class Read {
                     params.push(queryParams[key]); // JSON.parse를 사용하지 않고 직접 값을 추가합니다.
                 } else {
                     conditions.push(`json_extract(data, '$.${key}') = ?`);
-                    params.push(queryParams[key]);
+                    params.push(JSON.parse(queryParams[key]));
                 }
             });
 
