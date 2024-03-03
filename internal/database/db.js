@@ -24,7 +24,7 @@ if (!fs.existsSync(dataDir)) {
 // 데이터베이스 파일의 전체 경로를 설정합니다.
 const dbPath = path.join(dataDir, "database.db");
 
-log.info("Database path: ", dbPath);
+log.info(`Database path: ${dbPath}`);
 
 // 데이터베이스를 초기화합니다.
 const db = new sqlite3.Database(dbPath, (err) => {
