@@ -4,11 +4,13 @@ function RouterVerification(req, res, next) {
     const path = req.params[0]; // 요청의 경로를 가져옴
     if (JSON.parse(data)["id"]) {
         // ID가 포함되어 있는지 확인
-        return res.status(400).json({ error: "ID cannot be updated" });
+        return res
+            .status(400)
+            .json({ error: "IDs are not allowed in queries" });
     }
     if (path[path.length - 1] === "/") {
         // 경로가 /로 끝나는지 확인
-        return res.status(400).json({ error: "paths must not end in /." });
+        return res.status(400).json({ error: "paths must not end in /" });
     }
     next();
 }
