@@ -6,13 +6,14 @@ exports.patch = (req, res) => {
     const path = req.params[0];
     const data = JSON.stringify(req.body);
 
-    patchModel.patch(path, data, res, (err, result) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(201).json({
-            message: "Data saved successfully",
-            id: result.lastID,
+    patchModel
+        .patch(path, data)
+        .then((result) => {
+            if (result) {
+                res.status(200).json(result);
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ error: err.message });
         });
-    });
 };

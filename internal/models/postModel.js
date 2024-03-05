@@ -6,18 +6,17 @@ class Post {
         this.db = db;
     }
 
-    post(path, data, res) {
+    post(path, data) {
         const query = `INSERT INTO entities (path, data) VALUES (?, ?)
         ON CONFLICT(path) DO UPDATE SET data = excluded.data;`;
-        this.db.run(query, [path, data], function (err) {
-            if (err) {
-                log.error("Error saving data", { path: path });
-                return res.status(500).json({ error: err.message });
-            }
-            log.success("Data saved", { path: path });
-            res.status(201).json({
-                message: "Data saved successfully",
-                id: this.lastID,
+        return new Promise((resolve, reject) => {
+            this.db.run(query, [path, data], function (err) {
+                if (err) {
+                    log.error("Error saving data", { path: path });
+                    return reject(err);
+                }
+                log.success("Data saved", { path: path });
+                return resolve({ message: "Data saved successfully" });
             });
         });
     }
