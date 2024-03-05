@@ -1,4 +1,5 @@
 function RouterVerification(req, res, next) {
+    // 미들웨어 함수를 정의합니다.
     // 라우터 요청을 검증하는 미들웨어
     const data = JSON.stringify(req.body); // 요청의 본문을 문자열로 변환
     const path = req.params[0]; // 요청의 경로를 가져옴

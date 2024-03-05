@@ -9,15 +9,17 @@ log.info("Database module loaded");
 // 실행 파일의 디렉토리를 가져옵니다.
 let exeDir = "";
 if (process.pkg) {
-    exeDir = path.dirname(process.execPath);
+    //pkg로 빌드된 소프트웨어인지 확인, 경로 출ㄺ 에러발생
+    exeDir = path.dirname(process.execPath); //배포 환경
 } else {
-    exeDir = __dirname;
+    exeDir = __dirname; //개발환경에서의 경로
 }
 // 'data' 폴더의 경로를 설정합니다.
 const dataDir = path.join(exeDir, "data");
 
 // 'data' 폴더가 없으면 생성합니다.
 if (!fs.existsSync(dataDir)) {
+    // 폴더가 없으면
     fs.mkdirSync(dataDir);
 }
 
@@ -33,6 +35,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     } else {
         db.serialize(() => {
             db.run(
+                // entities 테이블을 생성합니다.
                 `
                 CREATE TABLE IF NOT EXISTS entities (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,

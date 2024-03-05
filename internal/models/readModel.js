@@ -19,6 +19,7 @@ class Read {
                     row.data = JSON.parse(row.data);
                     row.data.id = row.id;
                     res.json(row.data);
+                    return row.data;
                 } else {
                     log.fail("Data not found", { path: path });
                     res.status(404).json({ message: "Data not found" });
@@ -63,7 +64,6 @@ class Read {
             let sqlQuery = `SELECT data,id FROM entities`; // 변수명을 sqlQuery로 변경하여 중복을 피함
             const conditions = [];
             const params = [];
-
             // 'path' 조건을 추가
             conditions.push(`path LIKE ?`);
             params.push(`${path}%`); // path 파라미터를 사용하여 LIKE 조건 설정
