@@ -97,6 +97,18 @@ DELETE localhost:[port]/[path]
 
 Deletes JSON data to the specified path.
 
+and if you want to delete a specific data, you can use this.
+
+```bash
+DELETE localhost:[port]/[path]
+```
+
+body is written like this.
+
+```
+{ "key":["key1","key2"]}
+```
+
 # PATCH
 
 ```bash
